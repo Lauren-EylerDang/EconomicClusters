@@ -1,4 +1,4 @@
-EC_patient<-function(Pts, Medoids, Pop, PopClusters){
+EC_patient<-function(Pts, Medoids, Pop=NULL, PopClusters=NULL){
   ptmed<-matrix(nrow=2,ncol=ncol(Pts))
   dizzy<-matrix(nrow=nrow(Pts),ncol=nrow(Medoids))
   for (i in 1:nrow(Pts)){
@@ -20,9 +20,7 @@ EC_patient<-function(Pts, Medoids, Pop, PopClusters){
   }
   group<-unlist(group)
   group<-as.factor(group)
-  results<-list()
-  results$group<-group
-  PatientsNAClustwhich<-which(is.na(results$group)==TRUE)
+  PatientsNAClustwhich<-which(is.na(group)==TRUE)
   PatientsNAClust<-Pts[PatientsNAClustwhich,]
   ptmed<-matrix(nrow=2,ncol=ncol(PatientsNAClust))
   dizzyNA<-matrix(nrow=nrow(PatientsNAClust),ncol=nrow(Pop))
@@ -43,13 +41,13 @@ EC_patient<-function(Pts, Medoids, Pop, PopClusters){
   }
   cmatch_same<-vector()
   for (i in 1:length(clustmatch)){
-    if(any(prop.table(table(clustmatch[[i]])))==1){
+    if(any(prop.table(table(clustmatch[[i]]))==1)==TRUE){
       cmatch_same[i]=TRUE
     } else {
       cmatch_same[i]=FALSE
     }
   }
-  clustmatchone<-factor(rep(NA, length=nrow(PatientsNAClust)), levels=levels(clustmatch[[1]]))
+  clustmatchone<-factor(rep(NA, length=nrow(PatientsNAClust)), levels=rownames(Medoids))
   for(i in 1:length(clustmatchone)){
     if(cmatch_same[i]==TRUE){
       clustmatchone[i]<-clustmatch[[i]][1]
@@ -57,7 +55,8 @@ EC_patient<-function(Pts, Medoids, Pop, PopClusters){
   }
   clustmatchone<-as.data.frame(clustmatchone)
   rownames(clustmatchone)<-rownames(PatientsNAClust)
-  results$group<-as.data.frame(results$group)
-  results$group[which((rownames(results$group)%in%rownames(clustmatchone))==TRUE),]<-clustmatchone
-  return(results)
+  group<-as.data.frame(group)
+  group[which((rownames(group)%in%rownames(clustmatchone))==TRUE),]<-clustmatchone
+  return(group)
+#' @export
 }
