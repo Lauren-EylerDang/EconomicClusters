@@ -18,14 +18,14 @@ marg_1<-list(V9, V11)
 R_check<-matrix(c(1, 0.95, 0.95, 1), nrow=2, ncol=2, byrow=TRUE)
 
 library(methods)
-data<-GenOrd::ordsample(1000, marg_1, R_check)
+data<-GenOrd::ordsample(100, marg_1, R_check)
 
-V1<-stats::rbinom(1000, 1, 0.05)
-V2<-stats::rbinom(1000, 1, 0.4)
-V3<-stats::rbinom(1000, 1, 0.05)
-V4<-stats::rbinom(1000, 1, 0.05)
-V5<-stats::rbinom(1000, 1, 0.6)
-V6<-stats::rbinom(1000, 1, 0.8)
+V1<-stats::rbinom(100, 1, 0.05)
+V2<-stats::rbinom(100, 1, 0.4)
+V3<-stats::rbinom(100, 1, 0.05)
+V4<-stats::rbinom(100, 1, 0.05)
+V5<-stats::rbinom(100, 1, 0.6)
+V6<-stats::rbinom(100, 1, 0.8)
 
 marg_cat<-list(V7, V8, V10, V12, V13)
 R_cat<-matrix(rep(0, 25), nrow=5, ncol=5)
@@ -39,7 +39,7 @@ for (i in 1:nrow(R_cat)){
 }
 
 
-data_cat<-GenOrd::ordsample(1000, marg_cat, R_cat)
+data_cat<-GenOrd::ordsample(100, marg_cat, R_cat)
 
 assets_fullset<-data.frame(as.factor(V1), as.factor(V2), as.factor(V3), as.factor(V4), as.factor(V5), as.factor(V6), as.factor(data_cat[,1]), as.factor(data_cat[,2]), as.factor(data[,1]), as.factor(data_cat[,3]), as.factor(data[,2]), as.factor(data_cat[,4]), as.factor(data_cat[,5]))
 colnames(assets_fullset)<-c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13")
