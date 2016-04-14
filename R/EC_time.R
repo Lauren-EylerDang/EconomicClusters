@@ -13,6 +13,7 @@ EC_time<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores){
   doParallel::registerDoParallel(cores=ncores)
   ASW<-matrix(nrow=nrow(col_indx), ncol=(kmax-kmin+1))
 #' @import foreach
+#' @import doParallel
   ASW<-foreach::foreach (i=1:ncores, .combine='rbind') %dopar% {
     combi<-X[,!is.na(col_indx[i,])]
     if(any(!is.na(Y))){ 
