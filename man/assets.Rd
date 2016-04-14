@@ -7,7 +7,7 @@
 }
 \usage{data(assets)}
 \format{
-  A data frame with 1000 observations on the following 10 variables coded as factors.
+  A data frame with 100 observations on the following 10 variables coded as factors.
  \describe{
     \item{\code{V2}}{ a binary 0/1 variable with probability 0.4 of value 1}
     \item{\code{V5}}{ a binary 0/1 variable with probability 0.6 of value 1}
@@ -29,8 +29,8 @@
   This data set was simulated by the package authors to demonstrate the functionality of the 'EconomicClusters' package.
 }
 \references{
-1. Rutstein SO. Steps to Constructing the New DHS Wealth Index. ICF International: Rockville, Maryland, \url{http://dhsprogram.com/programming/wealth%20index/Steps_to_constructing_the_new_DHS_Wealth_Index.pdf
-  }
+Rutstein SO. (n.d.). Steps to Constructing the New DHS Wealth Index. ICF International: Rockville, Maryland, <\url{http://dhsprogram.com/programming/wealth%20index/Steps_to_constructing_the_new_DHS_Wealth_Index.pdf
+}>
 }
 \seealso{
 \code{\link[EconomicClusters:EconomicClusters-package]{EC_vars}}, \code{\link[EconomicClusters:EconomicClusters-package]{EC_DHSwts}}, \code{\link[EconomicClusters:EconomicClusters-package]{EconomicClusters}}
@@ -45,7 +45,7 @@
 #Let's assume that we've already made a data frame containing 
 #only the asset variables we will consider for variable selection, called 'assets'.
 #Now, let's create a data frame with Column 1 containing weighted number of household members 
-#as per DHS Wealth Index protocols[1] 
+#as per DHS Wealth Index protocols (Rutstein, n.d.) 
 #and Columns 2 to 11 containing all asset variables to be considered for selection.
 
 data(HH_survey)

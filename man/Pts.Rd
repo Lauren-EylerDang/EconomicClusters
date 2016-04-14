@@ -8,7 +8,7 @@
 }
 \usage{data(Pts)}
 \format{
-  A data frame with 250 observations on the following 5 variables.
+  A data frame with 50 observations on the following 5 variables.
   \describe{
     \item{\code{V2}}{ a binary 0/1 variable with probability 0.4 of value 1}
     \item{\code{V5}}{ a binary 0/1 variable with probability 0.6 of value 1}
@@ -37,10 +37,12 @@
 
 data(Pts)
 data(Medoids)
-Pt_clust<-EC_patient(Pts, Medoids)
+data(Pop)
+data(PopClusters)
+Pt_clust<-EC_patient(Pts, Medoids, Pop, PopClusters)
 #number of patients per cluster:
-table(Pt_clust$group)
+table(Pt_clust)
 
-#We now have a vector of patient cluster membership ('Pt_clust$group')
+#We now have a vector of patient cluster membership.
 }
 \keyword{datasets}

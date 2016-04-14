@@ -19,7 +19,7 @@ EconomicClusters(X, Y, nvars, kmin, kmax, ncores, threshold)
 \details{
   'EconomicClusters' generates data frames consisting of all possible combinations of 'nvars' number of asset variables and generates distance matrices for each data frame using function 'daisy' from package 'cluster' with metric = "gower". It then runs weighted k-medoids clustering using package 'WeightedCluster' on each of these data frames. The algorithm selects the clustering model with the maximum average sillhouette width (ASW) and reports the ASW, variables selected, and number of clusters of this model. The resulting 'EconomicClusters' object also includes a list of cluster medoids for the selected model, a data frame consisting of the cluster medoids' responses to the model-defining variables, a vector listing cluster membership for all observations in the orginial data set, and a data frame of the full population's responses to the selected variables.
   
-  Some researchers may wish to include a specific variable in all cluster models. For example, the DHS now reports two different wealth index models, one for rural and one for urban populations, because the meaning of asset-based wealth within these two populations can be very different[1]. One could include rural/urban setting as a variable in all models by specifying Y as a vector indicating rural or urban location.
+  Some researchers may wish to include a specific variable in all cluster models. For example, the DHS now reports two different wealth index models, one for rural and one for urban populations, because the meaning of asset-based wealth within these two populations can be very different (Rutstein, 2008). One could include rural/urban setting as a variable in all models by specifying Y as a vector indicating rural or urban location.
   
   Generating a model with too many clusters may create challenges in data analysis due to small sample size in some clusters. For this reason, some researchers may prefer to set a threshold ASW. In this case, the algorithm will assess all combinations of 'nvars' assets variables for each cluster number starting from 'kmin' but will stop after completing calculations for the cluster number being analyzed when the threshold ASW is reached. The algorithm will then select the combination of variables with that cluster number that have the highest ASW. If a threshold is not specified, then the algorithm will assess all cluster numbers from kmin to kmax.
   
@@ -38,11 +38,12 @@ EconomicClusters(X, Y, nvars, kmin, kmax, ncores, threshold)
 }
 
 \references{
-1. Rutstein SO. The DHS wealth index: Approaches for rural and urban areas. DHS Working Papers. MEASURE DHS+, ORC Macro: Calverton, Maryland, 2008, \url{http://pdf.usaid.gov/pdf_docs/PNADN521.pdf. Accessed June 27, 2015}.
+Rutstein SO. (2008). The DHS wealth index: Approaches for rural and urban areas. DHS Working Papers. MEASURE DHS+, ORC Macro: Calverton, Maryland, <\url{http://pdf.usaid.gov/pdf_docs/PNADN521.pdf
+>}.
 
-2. Eyler LE, Hubbard A, Juillard CJ...
+Eyler LE, Hubbard A, Juillard CJ...
 
-3. Kaufman L, Rousseeuw PJ. Finding Groups in Data: An Introduction to Cluster Analysis (Vol. 344). John Wiley & Sons: Hoboken, New Jerkey, 2009.
+Kaufman L, Rousseeuw PJ. (2009). Finding Groups in Data: An Introduction to Cluster Analysis (Vol. 344). John Wiley & Sons: Hoboken, New Jerkey. <ISBN-13: 978-0471735786; ISBN-10: 0471735787>
 }
 
 \seealso{\code{\link[EconomicClusters:EconomicClusters-package]{EconomicClusters-package}}, \code{\link[EconomicClusters:EconomicClusters-package]{EC_vars}}, \code{\link[EconomicClusters:EconomicClusters-package]{EC_DHSwts}}, \code{\link[EconomicClusters:EconomicClusters-package]{EC_time}}, \code{\link[EconomicClusters:EconomicClusters-package]{EC_patient}}, \code{\link[EconomicClusters:EconomicClusters-package]{data_for_EC}}, \code{\link[WeightedCluster]{wcKMedRange}}, \code{\link[cluster]{daisy}}, \code{\link[foreach]{foreach}}, \code{\link[doParallel]{doParallel}}
@@ -61,12 +62,12 @@ EconomicClusters(X, Y, nvars, kmin, kmax, ncores, threshold)
 #and Columns 2 to 11 describing ownership of 10 assets we want to consider for variable selection.
 #Now, let's use 'EconomicClusters' to select the 5 variables 
 #and number of clusters that best cluster our population.
-#We choose to set cluster range from 10 to 20.
+#We choose to set cluster range from 5 to 10.
 
 data(data_for_EC)
-EC<-EconomicClusters(data_for_EC, nvars=5, kmin=10, kmax=20, ncores=2)
+EC<-EconomicClusters(data_for_EC, nvars=5, kmin=5, kmax=10, ncores=2)
 
-#For a guide for interpreting ASW_max, see Kaufman and Rousseeuw (2009)[3].
+#For a guide for interpreting ASW_max, see Kaufman and Rousseeuw (2009).
 
 #To view a data frame consisting of the cluster medoids' responses to the model-defining variables:
 

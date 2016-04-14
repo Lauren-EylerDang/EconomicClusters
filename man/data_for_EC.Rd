@@ -8,7 +8,7 @@
 }
 \usage{data(data_for_EC)}
 \format{
-  A data frame with 1000 observations on the following 11 variables.
+  A data frame with 100 observations on the following 11 variables.
   \describe{
     \item{\code{Weights}}{a numeric vector of weighted number of household members}
     \item{\code{V2}}{ a binary 0/1 variable with probability 0.4 of value 1}

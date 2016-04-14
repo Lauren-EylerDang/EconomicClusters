@@ -31,13 +31,14 @@ Running the full 'EconomicClusters' algorithm on a real household survey data se
 
 \examples{
 #We want to know how much computing time we need to run 'EconomicClusters' on our data set 
-#to select 5 variables with cluster numbers ranging from 10 to 20.
+#to select 5 variables with cluster numbers ranging from 5 to 10.
 #Our computer has 2 cores that we can devote to running the algorithm.
 
 data(data_for_EC)
-EC_time(data_for_EC, nvars=5, kmin=10, kmax=20, ncores=2)
+EC_time(data_for_EC, nvars=5, kmin=5, kmax=10, ncores=2)
 
-#You can estimate that it will take 0.14 hours to run the full 'EconomicClusters' algorithm on this dataset.
+#You can estimate that it will take 0.0037 hours
+#to run the full 'EconomicClusters' algorithm on this dataset.
 #Note: To run this analysis on a full household survey data set will take much longer. 
 #Don't worry! We have a free and publically available solution for you.
 #Please see the help file for 'EconomicClusters-package' to find out more.

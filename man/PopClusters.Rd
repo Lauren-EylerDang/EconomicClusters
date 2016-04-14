@@ -8,7 +8,7 @@
 }
 \usage{data(Pop)}
 \format{
-  A data frame with 29 observations on 1 variable. To simplify the analysis for the sake of demonstration, this data frame was generated manually.
+  A data frame with 13 observations on 1 variable. To simplify the analysis for the sake of demonstration, this data frame was generated manually.
     \describe{
       \item{\code{PopClusters}}{ a character vector of cluster names}
     }
@@ -41,8 +41,8 @@
   data(PopClusters)
   Pt_clust<-EC_patient(Pts, Medoids, Pop, PopClusters)
   #number of patients per cluster:
-  table(Pt_clust$group)
+  table(Pt_clust)
   
-  #We now have a vector of patient cluster membership (Pt_clust$group).
+  #We now have a vector of patient cluster membership.
 }
 \keyword{datasets}

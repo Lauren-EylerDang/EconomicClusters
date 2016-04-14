@@ -7,7 +7,7 @@
 }
 \usage{data(assets_fullset)}
 \format{
-  A data frame with 1000 observations on the following 13 variables coded as factors.
+  A data frame with 100 observations on the following 13 variables coded as factors.
   \describe{
     \item{\code{V1}}{ a binary 0/1 variable with probability 0.05 of value 1}
     \item{\code{V2}}{ a binary 0/1 variable with probability 0.4 of value 1}
@@ -43,7 +43,7 @@
 #of our data set 'assets_fullset'.
 
 data(assets_fullset)
-assets<-EC_vars(assets_fullset, 0.10, 7)
+assets<-EC_vars(assets_fullset, 0.10)
 
 #By selecting assets owned by at least 10 percent of the population, 
 #we now have 10 variables and 252 possible combinations. 

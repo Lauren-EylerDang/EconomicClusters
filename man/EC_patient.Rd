@@ -43,9 +43,9 @@ data(Pop)
 data(PopClusters)
 Pt_clust<-EC_patient(Pts, Medoids, Pop, PopClusters)
 #number of patients per cluster:
-table(Pt_clust$group)
+table(Pt_clust)
 
-#We now have a vector of patient cluster membership (Pt_clust$group).
+#We now have a vector of patient cluster membership.
 }
 
 

@@ -22,13 +22,13 @@ Lauren Eyler, Alan Hubbard, Catherine Juillard
 Maintainer: Lauren Eyler <economic.clusters@gmail.com>
 }
 \references{
-1. Eyler LE, Hubbard A, Juillard CJ...
+Eyler LE, Hubbard A, Juillard CJ...
 
-2.  Rutstein SO. Steps to Constructing the New DHS Wealth Index. ICF International: Rockville, Maryland, \url{http://dhsprogram.com/programming/wealth%20index/Steps_to_constructing_the_new_DHS_Wealth_Index.pdf
+Rutstein SO. (n.d.). Steps to Constructing the New DHS Wealth Index. ICF International: Rockville, Maryland, <\url{http://dhsprogram.com/programming/wealth%20index/Steps_to_constructing_the_new_DHS_Wealth_Index.pdf
+}>
+
+Kaufman L, Rousseeuw PJ. (2009). Finding Groups in Data: An Introduction to Cluster Analysis (Vol. 344). John Wiley & Sons: Hoboken, New Jerkey. <ISBN-13: 978-0471735786; ISBN-10: 0471735787>
 }
-
-3. Kaufman L, Rousseeuw PJ. Finding Groups in Data: An Introduction to Cluster Analysis (Vol. 344). John Wiley & Sons: Hoboken, New Jerkey, 2009.
-  }
 
 \keyword{ package }
 \seealso{\code{\link[WeightedCluster]{wcKMedRange}}, \code{\link[cluster]{daisy}}, \code{\link[foreach]{foreach}}, \code{\link[doParallel]{doParallel}
@@ -47,7 +47,7 @@ assets<-EC_vars(assets_fullset, p=0.10)
 #and all categorical asset variables with >2 levels.
 
 #Step 2: Generate a vector of weighted number of household members, 
-#as per DHS wealth index protocols [2] 
+#as per DHS wealth index protocols (Rutstein, n.d.) 
 #and bind it as the first column in your 'assets' data frame.
 #The variables needed to calculate the DHS weighted number of household members variable are: 
 #HH_survey$dejure = number of dejure household members, 
@@ -60,24 +60,23 @@ data_for_EC<-EC_DHSwts(assets, HH_survey$dejure, HH_survey$defacto, HH_survey$HH
 
 #Step 3: Estimate how long it will take to run the full 'EconomicClusters' algorithm 
 #by running the algorithm on 2 combinations in parallel on 2 computing cores 
-#to select 5 variables with cluster number ranging from 10 to 20:
+#to select 5 variables with cluster number ranging from 5 to 10:
 
 data(data_for_EC)
-EC_time(data_for_EC, nvars=5, kmin=10, kmax=20, ncores=2)
+EC_time(data_for_EC, nvars=5, kmin=5, kmax=10, ncores=2)
 
 #Step 4: Run 'EconomicClusters' to define a population-specific model of ecnomomic status 
-#with 5 variables and between 10 and 20 clusters for your data set.
-#Note: This example will take approximately 45 minutes to run.
+#with 5 variables and between 5 and 10 clusters for your data set.
 #The 'EconomicClusters' algorithm will require significantly more computing time
 #to run on a real household survey data set. 
 #For a free, publically available option for acquiring server time, 
 #please see www... (insert tutorial link).
 
 data(data_for_EC)
-EC<-EconomicClusters(data_for_EC, nvars=5, kmin=10, kmax=20, ncores=2)
+EC<-EconomicClusters(data_for_EC, nvars=5, kmin=5, kmax=10, ncores=2)
 
 
-#For a guide for interpreting ASW_max, see Kaufman and Rousseeuw (2009)[3].
+#For a guide for interpreting ASW_max, see Kaufman and Rousseeuw (2009).
 
 #To view a data frame consisting of the cluster medoids' responses to the model-defining variables:
 
@@ -104,9 +103,9 @@ data(Pop)
 data(PopClusters)
 Pt_clust<-EC_patient(Pts, Medoids, Pop, PopClusters)
 #number of patients per cluster:
-table(Pt_clust$group)
+table(Pt_clust)
 
-#We now have a vector of patient cluster membership (Pt_clust$group).
+#We now have a vector of patient cluster membership (Pt_clust).
 
 #Step 6: Use this information to assess for and take steps to eliminate 
 #health disparities in your population.

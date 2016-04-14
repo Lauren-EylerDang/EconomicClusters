@@ -8,7 +8,7 @@
 }
 \usage{data(Pop)}
 \format{
-A data frame with 29 observations on 5 variables. To simplify the analysis for the sake of demonstration, this data frame was generated manually to match the observations in Pts who do not match cluster medoids:
+A data frame with 13 observations on 5 variables. To simplify the analysis for the sake of demonstration, this data frame was generated manually to match the observations in Pts who do not match cluster medoids:
 \describe{
 \item{\code{V2}}{ a binary variable with levels 0, 1}
 \item{\code{V5}}{ a binary variable with levels 0, 1}
@@ -45,8 +45,8 @@ data(Pop)
 data(PopClusters)
 Pt_clust<-EC_patient(Pts, Medoids, Pop, PopClusters)
 #number of patients per cluster:
-table(Pt_clust$group)
+table(Pt_clust)
 
-#We now have a vector of patient cluster membership (Pt_clust$group).
+#We now have a vector of patient cluster membership.
 }
 \keyword{datasets}

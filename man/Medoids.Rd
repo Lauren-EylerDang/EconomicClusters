@@ -8,11 +8,11 @@
 }
 \usage{data(Medoids)}
 \format{
-  A data frame with 12 observations on 5 variables. To simplify the analysis for the sake of demonstration, this data frame was generated manually, as follows:
+  A data frame with 10 observations on 5 variables. To simplify the analysis for the sake of demonstration, this data frame was generated manually to mimic the medoids selected by the 'EconomicClusters' algorithm from 'data_for_EC', with variables as follows:
   \describe{
-    \item{\code{V2}}{ 0}
-    \item{\code{V5}}{ 1}
-    \item{\code{V6}}{ 1}
+    \item{\code{V2}}{ a binary variable with levels 0, 1}
+    \item{\code{V5}}{ a binary variable with levels 0, 1}
+    \item{\code{V6}}{ a binary variable with levels 0, 1}
     \item{\code{V9}}{ a categorical variable with levels 1 to 4}
     \item{\code{V11}}{ a categorical variable with levels 1 to 4}
   }
@@ -38,10 +38,12 @@
 
 data(Pts)
 data(Medoids)
-Pt_clust<-EC_patient(Pts, Medoids)
+data(Pop)
+data(PopClusters)
+Pt_clust<-EC_patient(Pts, Medoids, Pop, PopClusters)
 #number of patients per cluster:
-table(Pt_clust$group)
+table(Pt_clust)
 
-#We now have a vector of patient cluster membership ('Pt_clust$group')
+#We now have a vector of patient cluster membership
 }
 \keyword{datasets}
