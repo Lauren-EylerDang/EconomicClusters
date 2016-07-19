@@ -2,7 +2,7 @@
 \alias{EconomicClusters}
 \title{Population-Specific Economic Groups Defined by Few Asset Variables
 }
-\description{This function runs weighted k-medoids clustering using package 'WeightedCluster' for each combination of 'nvars' number of asset variables and selects the combination of asset variables and number of clusters with the highest average sillhouette width (ASW). The number of asset variables per combination and range of cluster numbers to be considered may be specified by the user. The aim of this function is to define the optimal clustering-based metric of economic status for a given population using a limited number of variables that can be assessed in a time-constrained setting, such as a trauma registry in a low- or middle-income country. Please note that the 'EconomicClusters' algorithm can require significant computing time to run on a real household survey data set. For a free, publically available option for acquiring server time, please see www... (insert tutorial link).
+\description{This function runs weighted k-medoids clustering using package 'WeightedCluster' for each combination of 'nvars' number of asset variables and selects the combination of asset variables and number of clusters with the highest average sillhouette width (ASW). The number of asset variables per combination and range of cluster numbers to be considered may be specified by the user. The aim of this function is to define the optimal clustering-based metric of economic status for a given population using a limited number of variables that can be assessed in a time-constrained setting, such as a trauma registry in a low- or middle-income country. Please note that the 'EconomicClusters' algorithm can require significant computing time to run on a real household survey data set. We have developed an EC shiny app to facilitate your use of the algorithm with our server. Please email Dr. Lauren Eyler at economic.clusters@gmail.com for more information about how to obtain and use this app.
 }
 \usage{
 EconomicClusters(X, Y, nvars, kmin, kmax, ncores, threshold)
@@ -25,7 +25,7 @@ EconomicClusters(X, Y, nvars, kmin, kmax, ncores, threshold)
   
   In some cases, more than one model may be tied for highest ASW. In this case, 'EconomicClusters' will return results for each of the models achieving the maximum ASW. In this case, the 'Medoid_dataframe', 'Cluster', and 'Population_assets' results will be in list form and must be converted to data frames or vectors if they are to be used in those formats. If only one model is selected, 'Medoid_dataframe' and 'Population_assets' are returned as data frames, and 'Cluster' is returned as a vector.
   
-  For further information regarding this methodology, please see Eyler et al. (2016)[2]. Recommended methods of intepreting the results of 'EconomicClusters' are also described in the examples below.
+  For further information regarding this methodology, please see Eyler et al. (2016). Recommended methods of intepreting the results of 'EconomicClusters' are also described in the examples below.
 }
 \value{
   \item{ASW_max}{ ASW of the selected model, which is the maximum ASW over all tested models}
@@ -41,7 +41,7 @@ EconomicClusters(X, Y, nvars, kmin, kmax, ncores, threshold)
 Rutstein SO. (2008). The DHS wealth index: Approaches for rural and urban areas. DHS Working Papers. MEASURE DHS+, ORC Macro: Calverton, Maryland, <\url{http://pdf.usaid.gov/pdf_docs/PNADN521.pdf
 >}.
 
-Eyler LE, Hubbard A, Juillard CJ...
+Eyler LE, Hubbard A, Juillard CJ. (2016). Assessment of Economic Status in Trauma Registries: A New Algorithm for Generating Population-Specific Clustering-Based Models of Economic Status for Time-Constrained Low-Resource Settings. International Journal of Medical Informatics, 94, 49-58. doi: 10.1016/j.ifmedinf.2016.05.004.
 
 Kaufman L, Rousseeuw PJ. (2009). Finding Groups in Data: An Introduction to Cluster Analysis (Vol. 344). John Wiley & Sons: Hoboken, New Jerkey. <ISBN-13: 978-0471735786; ISBN-10: 0471735787>
 }

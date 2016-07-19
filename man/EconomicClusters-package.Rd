@@ -2,7 +2,7 @@
 \alias{EconomicClusters-package}
 \docType{package}
 \title{Population-Specific Economic Groups Defined by Few Asset Variables}
-\description{The aim of this package is to facilitate health disparities research in time-constrained, low-resource settings, such as trauma registries in low- and middle-income countries. The 'EconomicClusters' algorithm defines population-specific metrics of economic status based on limited numbers of asset variables. This package is designed for use with large-scale household survey data, such as Demographic and Health Survey (DHS) data sets. Economic groups are defined by running weighted k-medoids clustering using package 'WeightedCluster' on all combinations of a limited number of asset variables. The combination of variables and number of clusters with the highest average sillhouette width (ASW) are selected as the optimal economic clustering model. We also include support functions to facilitate the use of the 'EconomicClusters' algorithm, including a function to assign study subjects to an economic cluster. For a more detailed description of this methodology, please see Eyler et al. (2016)[1]. Please note that the 'EconomicClusters' algorithm can require significant computing time to run on a real household survey data set. For a free, publically available option for acquiring server time, please see www... (insert tutorial link).}
+\description{The aim of this package is to facilitate health disparities research in time-constrained, low-resource settings, such as trauma registries in low- and middle-income countries. The 'EconomicClusters' algorithm defines population-specific metrics of economic status based on limited numbers of asset variables. This package is designed for use with large-scale household survey data, such as Demographic and Health Survey (DHS) data sets. Economic groups are defined by running weighted k-medoids clustering using package 'WeightedCluster' on all combinations of a limited number of asset variables. The combination of variables and number of clusters with the highest average sillhouette width (ASW) are selected as the optimal economic clustering model. We also include support functions to facilitate the use of the 'EconomicClusters' algorithm, including a function to assign study subjects to an economic cluster. For a more detailed description of this methodology, please see Eyler et al. (2016). Please note that the 'EconomicClusters' algorithm can require significant computing time to run on a real household survey data set. We have developed an EC shiny app to facilitate your use of the algorithm with our server. Please email Dr. Lauren Eyler at economic.clusters@gmail.com for more information about how to obtain and use this app.}
 \details{
 \tabular{ll}{
 Package: \tab EconomicClusters\cr
@@ -22,7 +22,7 @@ Lauren Eyler, Alan Hubbard, Catherine Juillard
 Maintainer: Lauren Eyler <economic.clusters@gmail.com>
 }
 \references{
-Eyler LE, Hubbard A, Juillard CJ...
+Eyler LE, Hubbard A, Juillard CJ. (2016). Assessment of Economic Status in Trauma Registries: A New Algorithm for Generating Population-Specific Clustering-Based Models of Economic Status for Time-Constrained Low-Resource Settings. International Journal of Medical Informatics, 94, 49-58. doi: 10.1016/j.ifmedinf.2016.05.004.
 
 Rutstein SO. (n.d.). Steps to Constructing the New DHS Wealth Index. ICF International: Rockville, Maryland, <\url{http://dhsprogram.com/programming/wealth%20index/Steps_to_constructing_the_new_DHS_Wealth_Index.pdf
 }>
