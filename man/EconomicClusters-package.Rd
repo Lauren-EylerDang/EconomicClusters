@@ -8,7 +8,7 @@
 Package: \tab EconomicClusters\cr
 Type: \tab Package\cr
 Version: \tab 1.0.1\cr
-Date: \tab 2015-10-30\cr
+Date: \tab 2016-07-19\cr
 License: \tab GPL (>=3)\cr
 }
 
@@ -73,7 +73,7 @@ EC_time(data_for_EC, nvars=5, kmin=5, kmax=10, ncores=2)
 #please see www... (insert tutorial link).
 
 data(data_for_EC)
-EC<-EconomicClusters(data_for_EC, nvars=5, kmin=5, kmax=10, ncores=2)
+EC<-EconomicClusters(data_for_EC, nvars=5, kmin=5, kmax=10, threshold=NA, minsize=0.10, ncores=2)
 
 
 #For a guide for interpreting ASW_max, see Kaufman and Rousseeuw (2009).
