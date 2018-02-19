@@ -1,4 +1,4 @@
-EconomicClusters<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores, threshold=NA){
+EconomicClusters<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores, threshold=NA, minsize){
   if (class(X[,1])=="numeric"){
     wt<-X[,1]
     X<-X[,-1]
@@ -27,27 +27,37 @@ EconomicClusters<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores, thr
         dizzy<-cluster::daisy(combi, metric="gower")
         wcKMR<-WeightedCluster::wcKMedRange(dizzy, kvals=(kmin+n-1), weights=wt)
         ASW[i,n]<-wcKMR$stats[,5]
+        if (any(prop.table(table((wcKMR$clustering)))<minsize)){
+          ASW[i,n]<-NA
+        } 
         rm(combi)
         rm(dizzy)
         rm(wcKMR)
         return(ASW[i,n])
       }
+      ###
+      
       if (any(ASW>threshold, na.rm=TRUE)){
         break}
     }
   } else {
-    ASW<-foreach::foreach (i=1:nrow(col_indx), .combine='rbind') %dopar% {
-      combi<-X[,!is.na(col_indx[i,])]
-      if(any(!is.na(Y))){ 
-        combi<-cbind(Y, combi)
+    for(n in 1:ncol(ASW)){
+      ASW[,n]<-foreach::foreach (i=1:nrow(col_indx), .combine='rbind')  %dopar% {
+        combi<-X[,!is.na(col_indx[i,])]
+        if(any(!is.na(Y))){ 
+          combi<-cbind(Y, combi)
+        }
+        dizzy<-cluster::daisy(combi, metric="gower")
+        wcKMR<-WeightedCluster::wcKMedRange(dizzy, kvals=(kmin+n-1), weights=wt)
+        ASW[i,n]<-wcKMR$stats[,5]
+        if (any(prop.table(table((wcKMR$clustering)))<minsize)){
+          ASW[i,n]<-NA
+        } 
+        rm(combi)
+        rm(dizzy)
+        rm(wcKMR)
+        return(ASW[i,n])
       }
-      dizzy<-cluster::daisy(combi, metric="gower")
-      wcKMR<-WeightedCluster::wcKMedRange(dizzy, kvals=seq(kmin, kmax, 1), weights=wt)
-      ASW[i,]<-wcKMR$stats[,5]
-      rm(combi)
-      rm(dizzy)
-      rm(wcKMR)
-      return(ASW[i,])
     }
   }
   
@@ -113,8 +123,4 @@ EconomicClusters<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores, thr
   return(results)
   #' @export
 }
-
-
-
-
 
