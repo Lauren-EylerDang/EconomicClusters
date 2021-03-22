@@ -19,16 +19,27 @@ EC_patient<-function(Pts, Medoids, Pop=NULL, PopClusters=NULL){
     }
   }
   group<-unlist(group)
-  group<-as.factor(group)
-  PatientsNAClustwhich<-which(is.na(group)==TRUE)
-  PatientsNAClust<-Pts[PatientsNAClustwhich,]
-  Pop_naclust <- rep(NA, nrow(PatientsNAClust))
-  for(i in 1:nrow(PatientsNAClust)){
-    if(length(unique(PopClusters[which(Pop[i,]==PatientsNAClust[i,])]))==1){
-      Pop_naclust[i]<-unique(PopClusters[which(Pop[i,]==PatientsNAClust[i,])])
-    }
+  group<-as.numeric(group)
+  
+  unclassified <- Pts[which(is.na(group)==TRUE),]
+  equalrows <- function(df, pt){
+    equal <- all(df == pt)
+    return(equal)
   }
-  group[which(is.na(group)==TRUE)]<-Pop_naclust
+  
+  
+  Pop_naclust_list <- list()
+  for(i in 1:nrow(unclassified)){
+    Pop_naclust_list[[i]]<-unique(PopClusters[which(apply(Pop, 1, equalrows, pt = unclassified[i,])==TRUE)])
+  }
+  
+  whichmiss <- which(is.na(group))
+  
+  for(i in 1:length(whichmiss)){
+    if(length(Pop_naclust_list[[i]])==1){
+      group[whichmiss][i]<-Pop_naclust_list[[i]]
+    } 
+  }
   return(group)
   #' @export
 }
