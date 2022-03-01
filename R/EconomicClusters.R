@@ -19,13 +19,14 @@ EconomicClusters<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores, thr
   #' @import doParallel
   if (!is.na(threshold)) {  
     for(n in 1:ncol(ASW)){
-      ASW[,n]<-foreach::foreach (i=1:nrow(col_indx), .combine='rbind')  %dopar% {
+      ASW[,n]<-foreach::foreach (i=1:nrow(col_indx), .combine='c')  %dopar% {
         combi<-X[,!is.na(col_indx[i,])]
         if(any(!is.na(Y))){ 
           combi<-cbind(Y, combi)
         }
-        dizzy<-cluster::daisy(combi, metric="gower")
-        wcKMR<-WeightedCluster::wcKMedRange(dizzy, kvals=(kmin+n-1), weights=wt)
+        combi_mat<-data.matrix(combi)
+        parD<-parDist(combi_mat, method =  "hamming") 
+        wcKMR<-WeightedCluster::wcKMedRange(parD, kvals=(kmin), weights=wt)
         ASW[i,n]<-wcKMR$stats[,5]
        if (is.na(minsize)==FALSE){
          if (any(prop.table(table((wcKMR$clustering)))<minsize)){
@@ -43,13 +44,14 @@ EconomicClusters<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores, thr
     }
   } else {
     for(n in 1:ncol(ASW)){
-      ASW[,n]<-foreach::foreach (i=1:nrow(col_indx), .combine='rbind')  %dopar% {
+      ASW[,n]<-foreach::foreach (i=1:nrow(col_indx), .combine='c')  %dopar% {
         combi<-X[,!is.na(col_indx[i,])]
         if(any(!is.na(Y))){ 
           combi<-cbind(Y, combi)
         }
-        dizzy<-cluster::daisy(combi, metric="gower")
-        wcKMR<-WeightedCluster::wcKMedRange(dizzy, kvals=(kmin+n-1), weights=wt)
+        combi_mat<-data.matrix(combi)
+        parD<-parDist(combi_mat, method =  "hamming") 
+        wcKMR<-WeightedCluster::wcKMedRange(parD, kvals=(kmin+n-1), weights=wt)
         ASW[i,n]<-wcKMR$stats[,5]
         if (is.na(minsize)==FALSE){
         if (any(prop.table(table((wcKMR$clustering)))<minsize)){
@@ -94,7 +96,8 @@ EconomicClusters<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores, thr
     if(any(!is.na(Y))){ 
       win_ds[[a]]<-cbind(Y, win_ds[[a]])
     }
-    win_daisy[[a]]<-cluster::daisy(win_ds[[a]], metric="gower")
+    win_ds[[a]]<-data.matrix(win_ds[[a]])
+    win_daisy[[a]]<-parDist(win_ds[[a]], method =  "hamming")
     win_wcKMedRange[[a]]<-WeightedCluster::wcKMedRange(win_daisy[[a]], kvals=K[[a]], weights=wt)
     Group[[a]]<-win_wcKMedRange[[a]]$clustering
     Medoids[[a]]<-c(unique(win_wcKMedRange[[a]]$clustering))

@@ -19,8 +19,9 @@ EC_time<-function(X, Y=rep(NA, nrow(X)), nvars, kmin, kmax, ncores){
     if(any(!is.na(Y))){ 
       combi<-cbind(Y, combi)
     }
-    dizzy<-cluster::daisy(combi, metric="gower")
-    wcKMR<-WeightedCluster::wcKMedRange(dizzy, kvals=seq(kmin, kmax, 1), weights=wt)
+    combi_mat<-data.matrix(combi)
+    parD<-parDist(combi_mat, method =  "hamming") 
+    wcKMR<-WeightedCluster::wcKMedRange(parD, kvals=(kmin), weights=wt)
     ASW[i,]<-wcKMR$stats[,5]
     rm(combi)
     rm(dizzy)
